@@ -8,308 +8,104 @@
 <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+SC:wght@400;600;700&family=JetBrains+Mono:wght@400;600&display=swap" rel="stylesheet">
 <style>
 :root {
-  --bg: #0a0c12;
-  --bg2: #11141e;
-  --bg3: #181c28;
-  --line: #232840;
-  --accent: #4f6ef7;
-  --accent2: #7c3aed;
-  --gold: #f0c060;
-  --green: #22c55e;
-  --red: #ef4444;
-  --text: #e8eaf6;
-  --muted: #8892b0;
-  --serif: 'Noto Serif SC', serif;
-  --mono: 'JetBrains Mono', monospace;
+  --bg:#0a0c12;--bg2:#11141e;--bg3:#181c28;--line:#232840;
+  --accent:#4f6ef7;--accent2:#7c3aed;--gold:#f0c060;
+  --green:#22c55e;--red:#ef4444;--text:#e8eaf6;--muted:#8892b0;
+  --serif:'Noto Serif SC',serif;--mono:'JetBrains Mono',monospace;
 }
-* { box-sizing: border-box; margin: 0; padding: 0; }
-html { scroll-behavior: smooth; }
-body {
-  background: var(--bg);
-  color: var(--text);
-  font-family: var(--serif);
-  font-size: 15px;
-  line-height: 1.8;
-  min-height: 100vh;
-}
-
-/* ── 顶部导航 ── */
-nav {
-  position: sticky; top: 0; z-index: 100;
-  background: rgba(10,12,18,0.92);
-  backdrop-filter: blur(12px);
-  border-bottom: 1px solid var(--line);
-  padding: 0 16px;
-  display: flex; align-items: center; justify-content: space-between;
-  height: 52px;
-}
-.nav-title {
-  font-size: 14px; font-weight: 600; letter-spacing: 0.05em;
-  color: var(--accent); font-family: var(--mono);
-}
-.menu-btn {
-  background: none; border: 1px solid var(--line);
-  color: var(--muted); padding: 6px 12px;
-  border-radius: 6px; font-size: 12px; cursor: pointer;
-  font-family: var(--mono);
-}
-.menu-btn:active { background: var(--bg3); }
-
-/* ── 目录抽屉 ── */
-.drawer {
-  position: fixed; top: 52px; right: 0; bottom: 0; width: 240px;
-  background: var(--bg2); border-left: 1px solid var(--line);
-  z-index: 99; transform: translateX(100%);
-  transition: transform 0.25s ease; overflow-y: auto; padding: 16px;
-}
-.drawer.open { transform: translateX(0); }
-.drawer-item {
-  display: block; padding: 10px 8px;
-  border-bottom: 1px solid var(--line);
-  color: var(--muted); font-size: 13px; text-decoration: none;
-  transition: color 0.15s;
-}
-.drawer-item:hover, .drawer-item:active { color: var(--accent); }
-.drawer-ch { color: var(--text); font-weight: 600; font-size: 12px; letter-spacing: 0.08em; padding-top: 16px; }
-
-/* ── 封面 ── */
-.cover {
-  min-height: 88vh;
-  display: flex; flex-direction: column; justify-content: center;
-  padding: 48px 24px 64px;
-  position: relative; overflow: hidden;
-}
-.cover::before {
-  content: '';
-  position: absolute; top: -80px; right: -80px;
-  width: 320px; height: 320px;
-  background: radial-gradient(circle, rgba(79,110,247,0.15) 0%, transparent 70%);
-  pointer-events: none;
-}
-.cover::after {
-  content: '';
-  position: absolute; bottom: -40px; left: -60px;
-  width: 240px; height: 240px;
-  background: radial-gradient(circle, rgba(124,58,237,0.12) 0%, transparent 70%);
-  pointer-events: none;
-}
-.cover-tag {
-  font-family: var(--mono); font-size: 11px; color: var(--accent);
-  letter-spacing: 0.15em; margin-bottom: 20px;
-  border: 1px solid rgba(79,110,247,0.3);
-  display: inline-block; padding: 4px 10px; border-radius: 4px;
-}
-.cover-title {
-  font-size: clamp(32px, 8vw, 52px);
-  font-weight: 700; line-height: 1.15;
-  letter-spacing: -0.01em; margin-bottom: 12px;
-}
-.cover-sub {
-  font-size: 15px; color: var(--muted);
-  margin-bottom: 36px; font-weight: 400;
-}
-.cover-cards {
-  display: grid; grid-template-columns: 1fr 1fr; gap: 10px;
-  margin-top: 8px;
-}
-.ccard {
-  background: var(--bg2); border: 1px solid var(--line);
-  border-radius: 10px; padding: 14px 12px;
-  font-size: 12px; color: var(--muted);
-}
-.ccard strong { display: block; color: var(--text); font-size: 13px; margin-bottom: 2px; }
-
-/* ── 主内容 ── */
-main { padding: 0 0 80px; }
-
-/* ── 章节 ── */
-.chapter {
-  border-top: 1px solid var(--line);
-  padding: 0;
-}
-.ch-header {
-  padding: 32px 24px 20px;
-  background: var(--bg2);
-}
-.ch-num {
-  font-family: var(--mono); font-size: 11px;
-  color: var(--accent); letter-spacing: 0.12em; margin-bottom: 6px;
-}
-.ch-title {
-  font-size: 22px; font-weight: 700; line-height: 1.2;
-}
-.ch-body { padding: 20px 24px; }
-
-/* ── 小节 ── */
-.section { margin-bottom: 28px; }
-.sec-title {
-  font-size: 15px; font-weight: 700;
-  color: var(--accent); margin-bottom: 10px;
-  padding-bottom: 6px;
-  border-bottom: 1px solid var(--line);
-  font-family: var(--mono);
-}
-.sec-body p { color: var(--muted); font-size: 14px; margin-bottom: 10px; line-height: 1.8; }
-.sec-body p strong { color: var(--text); }
-
-/* ── 提示块 ── */
-.tip {
-  background: rgba(79,110,247,0.08);
-  border-left: 3px solid var(--accent);
-  padding: 10px 14px; border-radius: 0 8px 8px 0;
-  font-size: 13px; color: var(--text);
-  margin: 12px 0; line-height: 1.7;
-}
-.tip.gold { border-color: var(--gold); background: rgba(240,192,96,0.08); color: var(--gold); }
-.tip.green { border-color: var(--green); background: rgba(34,197,94,0.08); color: var(--green); }
-.tip.red { border-color: var(--red); background: rgba(239,68,68,0.08); color: var(--red); }
-
-/* ── 列表 ── */
-ul.slist { list-style: none; padding: 0; }
-ul.slist li {
-  padding: 7px 0 7px 20px; position: relative;
-  font-size: 14px; color: var(--muted);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-}
-ul.slist li::before {
-  content: '▸'; position: absolute; left: 0;
-  color: var(--accent); font-size: 11px; top: 9px;
-}
-ul.slist li strong { color: var(--text); }
-
-/* ── 表格 ── */
-.tbl-wrap { overflow-x: auto; margin: 14px 0; border-radius: 10px; border: 1px solid var(--line); }
-table { width: 100%; border-collapse: collapse; font-size: 13px; }
-th {
-  background: var(--bg3); color: var(--accent);
-  font-family: var(--mono); font-size: 11px; letter-spacing: 0.06em;
-  padding: 10px 12px; text-align: left;
-  border-bottom: 1px solid var(--line);
-}
-td {
-  padding: 9px 12px; color: var(--muted);
-  border-bottom: 1px solid rgba(255,255,255,0.04);
-  vertical-align: top;
-}
-td strong { color: var(--text); }
-tr:last-child td { border-bottom: none; }
-tr:nth-child(even) td { background: rgba(255,255,255,0.02); }
-
-/* ── 步骤卡片 ── */
-.steps { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
-.step {
-  background: var(--bg2); border: 1px solid var(--line);
-  border-radius: 12px; padding: 14px 16px;
-  display: flex; gap: 14px; align-items: flex-start;
-}
-.step-num {
-  background: var(--accent); color: #fff;
-  font-family: var(--mono); font-size: 12px; font-weight: 600;
-  width: 26px; height: 26px; border-radius: 50%;
-  display: flex; align-items: center; justify-content: center;
-  flex-shrink: 0; margin-top: 2px;
-}
-.step-content { flex: 1; }
-.step-title { font-size: 14px; font-weight: 600; color: var(--text); margin-bottom: 4px; }
-.step-desc { font-size: 13px; color: var(--muted); line-height: 1.7; }
-.step-tag {
-  display: inline-block; margin-top: 6px;
-  font-family: var(--mono); font-size: 10px;
-  color: var(--accent); background: rgba(79,110,247,0.12);
-  padding: 2px 8px; border-radius: 4px;
-}
-
-/* ── 错误卡片 ── */
-.err-cards { display: flex; flex-direction: column; gap: 10px; margin: 14px 0; }
-.err-card {
-  background: var(--bg2); border: 1px solid rgba(239,68,68,0.2);
-  border-radius: 12px; padding: 14px 16px;
-}
-.err-title { font-size: 13px; font-weight: 700; color: var(--red); margin-bottom: 6px; }
-.err-body { font-size: 13px; color: var(--muted); line-height: 1.7; }
-.err-fix { font-size: 12px; color: var(--green); margin-top: 6px; }
-
-/* ── 检查清单 ── */
-.checklist { display: flex; flex-direction: column; gap: 8px; margin: 14px 0; }
-.check-item {
-  background: var(--bg2); border: 1px solid var(--line);
-  border-radius: 10px; padding: 12px 16px;
-  display: flex; align-items: flex-start; gap: 12px;
-}
-.check-box {
-  width: 20px; height: 20px; border: 2px solid var(--line);
-  border-radius: 5px; flex-shrink: 0; margin-top: 2px;
-  display: flex; align-items: center; justify-content: center;
-  font-size: 11px; cursor: pointer; transition: all 0.15s;
-}
-.check-box.checked { background: var(--green); border-color: var(--green); color: #000; }
-.check-q { font-size: 13px; color: var(--text); line-height: 1.6; }
-.check-a { font-size: 11px; color: var(--red); margin-top: 3px; font-family: var(--mono); }
-
-/* ── 止盈方法卡 ── */
-.tp-cards { display: flex; flex-direction: column; gap: 12px; margin: 14px 0; }
-.tp-card {
-  background: var(--bg2); border: 1px solid var(--line);
-  border-radius: 12px; overflow: hidden;
-}
-.tp-header {
-  padding: 12px 16px;
-  background: var(--bg3);
-  display: flex; align-items: center; gap: 10px;
-}
-.tp-badge {
-  font-family: var(--mono); font-size: 10px;
-  padding: 3px 8px; border-radius: 4px;
-}
-.tp-name { font-size: 14px; font-weight: 700; }
-.tp-body { padding: 12px 16px; font-size: 13px; color: var(--muted); line-height: 1.7; }
-
-/* ── 做空对照 ── */
-.vs-table { display: flex; flex-direction: column; gap: 1px; background: var(--line); border-radius: 10px; overflow: hidden; margin: 14px 0; }
-.vs-row { display: grid; grid-template-columns: 80px 1fr 1fr; background: var(--bg2); }
-.vs-row.header { background: var(--bg3); }
-.vs-cell { padding: 10px 12px; font-size: 13px; }
-.vs-row.header .vs-cell { font-family: var(--mono); font-size: 11px; color: var(--accent); }
-.vs-cell.label { color: var(--muted); font-size: 12px; border-right: 1px solid var(--line); }
-.vs-cell.long { color: var(--green); }
-.vs-cell.short { color: var(--red); }
-
-/* ── 底部 ── */
-footer {
-  text-align: center; padding: 32px 24px;
-  border-top: 1px solid var(--line);
-  font-size: 12px; color: var(--muted);
-  font-family: var(--mono);
-}
-
-/* ── 进度条 ── */
-.progress-bar {
-  position: fixed; top: 52px; left: 0; right: 0; height: 2px;
-  background: var(--line); z-index: 98;
-}
-.progress-fill {
-  height: 100%; background: linear-gradient(90deg, var(--accent), var(--accent2));
-  width: 0%; transition: width 0.1s;
-}
-
-@media (min-width: 600px) {
-  .ch-body, .ch-header { padding-left: 32px; padding-right: 32px; }
-  .cover { padding: 64px 32px; }
-  .cover-cards { grid-template-columns: repeat(4, 1fr); }
-}
+*{box-sizing:border-box;margin:0;padding:0;}
+html{scroll-behavior:smooth;}
+body{background:var(--bg);color:var(--text);font-family:var(--serif);font-size:15px;line-height:1.8;min-height:100vh;}
+nav{position:sticky;top:0;z-index:100;background:rgba(10,12,18,0.93);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);padding:0 16px;display:flex;align-items:center;justify-content:space-between;height:52px;}
+.nav-title{font-size:14px;font-weight:600;letter-spacing:.05em;color:var(--accent);font-family:var(--mono);}
+.menu-btn{background:none;border:1px solid var(--line);color:var(--muted);padding:6px 12px;border-radius:6px;font-size:12px;cursor:pointer;font-family:var(--mono);}
+.drawer{position:fixed;top:52px;right:0;bottom:0;width:240px;background:var(--bg2);border-left:1px solid var(--line);z-index:99;transform:translateX(100%);transition:transform .25s ease;overflow-y:auto;padding:16px;}
+.drawer.open{transform:translateX(0);}
+.drawer-item{display:block;padding:10px 8px;border-bottom:1px solid var(--line);color:var(--muted);font-size:13px;text-decoration:none;transition:color .15s;}
+.drawer-item:hover{color:var(--accent);}
+.drawer-ch{color:var(--text);font-weight:600;font-size:12px;letter-spacing:.08em;padding-top:16px;}
+.cover{min-height:88vh;display:flex;flex-direction:column;justify-content:center;padding:48px 24px 64px;position:relative;overflow:hidden;}
+.cover::before{content:'';position:absolute;top:-80px;right:-80px;width:320px;height:320px;background:radial-gradient(circle,rgba(79,110,247,.15) 0%,transparent 70%);pointer-events:none;}
+.cover-tag{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.15em;margin-bottom:20px;border:1px solid rgba(79,110,247,.3);display:inline-block;padding:4px 10px;border-radius:4px;}
+.cover-title{font-size:clamp(32px,8vw,52px);font-weight:700;line-height:1.15;letter-spacing:-.01em;margin-bottom:12px;}
+.cover-sub{font-size:15px;color:var(--muted);margin-bottom:36px;}
+.cover-cards{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:8px;}
+.ccard{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:14px 12px;font-size:12px;color:var(--muted);}
+.ccard strong{display:block;color:var(--text);font-size:13px;margin-bottom:2px;}
+main{padding:0 0 80px;}
+.chapter{border-top:1px solid var(--line);}
+.ch-header{padding:32px 24px 20px;background:var(--bg2);}
+.ch-num{font-family:var(--mono);font-size:11px;color:var(--accent);letter-spacing:.12em;margin-bottom:6px;}
+.ch-title{font-size:22px;font-weight:700;line-height:1.2;}
+.ch-body{padding:20px 24px;}
+.section{margin-bottom:28px;}
+.sec-title{font-size:15px;font-weight:700;color:var(--accent);margin-bottom:10px;padding-bottom:6px;border-bottom:1px solid var(--line);font-family:var(--mono);}
+.sec-body p{color:var(--muted);font-size:14px;margin-bottom:10px;line-height:1.8;}
+.sec-body p strong{color:var(--text);}
+.tip{background:rgba(79,110,247,.08);border-left:3px solid var(--accent);padding:10px 14px;border-radius:0 8px 8px 0;font-size:13px;color:var(--text);margin:12px 0;line-height:1.7;}
+.tip.gold{border-color:var(--gold);background:rgba(240,192,96,.08);color:var(--gold);}
+.tip.green{border-color:var(--green);background:rgba(34,197,94,.08);color:var(--green);}
+.tip.red{border-color:var(--red);background:rgba(239,68,68,.08);color:var(--red);}
+ul.slist{list-style:none;padding:0;}
+ul.slist li{padding:7px 0 7px 20px;position:relative;font-size:14px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.04);}
+ul.slist li::before{content:'▸';position:absolute;left:0;color:var(--accent);font-size:11px;top:9px;}
+ul.slist li strong{color:var(--text);}
+.tbl-wrap{overflow-x:auto;margin:14px 0;border-radius:10px;border:1px solid var(--line);}
+table{width:100%;border-collapse:collapse;font-size:13px;}
+th{background:var(--bg3);color:var(--accent);font-family:var(--mono);font-size:11px;letter-spacing:.06em;padding:10px 12px;text-align:left;border-bottom:1px solid var(--line);}
+td{padding:9px 12px;color:var(--muted);border-bottom:1px solid rgba(255,255,255,.04);vertical-align:top;}
+td strong{color:var(--text);}
+tr:last-child td{border-bottom:none;}
+tr:nth-child(even) td{background:rgba(255,255,255,.02);}
+.steps{display:flex;flex-direction:column;gap:10px;margin:14px 0;}
+.step{background:var(--bg2);border:1px solid var(--line);border-radius:12px;padding:14px 16px;display:flex;gap:14px;align-items:flex-start;}
+.step-num{background:var(--accent);color:#fff;font-family:var(--mono);font-size:12px;font-weight:600;width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex-shrink:0;margin-top:2px;}
+.step-title{font-size:14px;font-weight:600;color:var(--text);margin-bottom:4px;}
+.step-desc{font-size:13px;color:var(--muted);line-height:1.7;}
+.step-tag{display:inline-block;margin-top:6px;font-family:var(--mono);font-size:10px;color:var(--accent);background:rgba(79,110,247,.12);padding:2px 8px;border-radius:4px;}
+.err-cards{display:flex;flex-direction:column;gap:10px;margin:14px 0;}
+.err-card{background:var(--bg2);border:1px solid rgba(239,68,68,.2);border-radius:12px;padding:14px 16px;}
+.err-title{font-size:13px;font-weight:700;color:var(--red);margin-bottom:6px;}
+.err-body{font-size:13px;color:var(--muted);line-height:1.7;}
+.err-fix{font-size:12px;color:var(--green);margin-top:6px;}
+.checklist{display:flex;flex-direction:column;gap:8px;margin:14px 0;}
+.check-item{background:var(--bg2);border:1px solid var(--line);border-radius:10px;padding:12px 16px;display:flex;align-items:flex-start;gap:12px;}
+.check-box{width:20px;height:20px;border:2px solid var(--line);border-radius:5px;flex-shrink:0;margin-top:2px;display:flex;align-items:center;justify-content:center;font-size:11px;cursor:pointer;transition:all .15s;}
+.check-box.checked{background:var(--green);border-color:var(--green);color:#000;}
+.check-q{font-size:13px;color:var(--text);line-height:1.6;}
+.check-a{font-size:11px;color:var(--red);margin-top:3px;font-family:var(--mono);}
+.tp-cards{display:flex;flex-direction:column;gap:12px;margin:14px 0;}
+.tp-card{background:var(--bg2);border:1px solid var(--line);border-radius:12px;overflow:hidden;}
+.tp-header{padding:12px 16px;background:var(--bg3);display:flex;align-items:center;gap:10px;}
+.tp-badge{font-family:var(--mono);font-size:10px;padding:3px 8px;border-radius:4px;}
+.tp-name{font-size:14px;font-weight:700;}
+.tp-body{padding:12px 16px;font-size:13px;color:var(--muted);line-height:1.7;}
+.vs-table{display:flex;flex-direction:column;gap:1px;background:var(--line);border-radius:10px;overflow:hidden;margin:14px 0;}
+.vs-row{display:grid;grid-template-columns:80px 1fr 1fr;background:var(--bg2);}
+.vs-row.header{background:var(--bg3);}
+.vs-cell{padding:10px 12px;font-size:13px;}
+.vs-row.header .vs-cell{font-family:var(--mono);font-size:11px;color:var(--accent);}
+.vs-cell.label{color:var(--muted);font-size:12px;border-right:1px solid var(--line);}
+.vs-cell.long{color:var(--green);}
+.vs-cell.short{color:var(--red);}
+/* 图表容器 */
+.chart-wrap{margin:16px 0;border-radius:12px;overflow:hidden;border:1px solid var(--line);background:var(--bg2);}
+.chart-wrap svg{display:block;width:100%;height:auto;}
+.chart-label{font-size:11px;color:var(--muted);padding:8px 12px;font-family:var(--mono);border-top:1px solid var(--line);}
+.progress-bar{position:fixed;top:52px;left:0;right:0;height:2px;background:var(--line);z-index:98;}
+.progress-fill{height:100%;background:linear-gradient(90deg,var(--accent),var(--accent2));width:0%;transition:width .1s;}
+footer{text-align:center;padding:32px 24px;border-top:1px solid var(--line);font-size:12px;color:var(--muted);font-family:var(--mono);}
+@media(min-width:600px){.ch-body,.ch-header{padding-left:32px;padding-right:32px;}.cover{padding:64px 32px;}.cover-cards{grid-template-columns:repeat(4,1fr);}}
 </style>
 </head>
 <body>
-
 <nav>
   <span class="nav-title">SMC / 交易手册</span>
   <button class="menu-btn" onclick="toggleDrawer()">目录 ≡</button>
 </nav>
-
 <div class="progress-bar"><div class="progress-fill" id="prog"></div></div>
-
 <div class="drawer" id="drawer">
-  <a class="drawer-item drawer-ch" href="#cover">封面</a>
+  <a class="drawer-item drawer-ch" href="#cover" onclick="closeDrawer()">封面</a>
   <a class="drawer-item" href="#ch1" onclick="closeDrawer()">第一章　什么是SMC</a>
   <a class="drawer-item" href="#ch2" onclick="closeDrawer()">第二章　核心概念</a>
   <a class="drawer-item" href="#ch3" onclick="closeDrawer()">第三章　完整入场流程</a>
@@ -321,7 +117,6 @@ footer {
   <a class="drawer-item" href="#ch9" onclick="closeDrawer()">第九章　实战建议</a>
 </div>
 
-<!-- 封面 -->
 <section class="cover" id="cover">
   <div class="cover-tag">SMART MONEY CONCEPTS</div>
   <h1 class="cover-title">SMC<br>交易手册</h1>
@@ -338,127 +133,311 @@ footer {
 
 <!-- 第一章 -->
 <div class="chapter" id="ch1">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 01</div>
-    <div class="ch-title">什么是 SMC</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 01</div><div class="ch-title">什么是 SMC</div></div>
   <div class="ch-body">
     <div class="section">
-      <div class="sec-body">
-        <p>SMC（Smart Money Concepts，聪明钱概念）是一套以<strong>机构视角</strong>分析市场的交易方法。核心思想是：散户看指标、看形态，机构看流动性。跟着机构的足迹走，而不是和机构对着干。</p>
-      </div>
-      <div class="tbl-wrap">
-        <table>
-          <tr><th>对比项</th><th>SMC</th><th>传统技术分析</th></tr>
-          <tr><td>核心逻辑</td><td>跟随机构行为</td><td>看形态与指标</td></tr>
-          <tr><td>入场依据</td><td>OB / FVG / 流动性</td><td>均线 / 形态 / 支撑阻力</td></tr>
-          <tr><td>止损位置</td><td>结构之外</td><td>支撑阻力附近</td></tr>
-          <tr><td>思维方式</td><td>反散户，找猎杀</td><td>顺势或逆势</td></tr>
-        </table>
-      </div>
+      <div class="sec-body"><p>SMC（Smart Money Concepts）是一套以<strong>机构视角</strong>分析市场的交易方法。核心思想是：散户看指标，机构看流动性。跟着机构的足迹走，而不是和机构对着干。</p></div>
+      <div class="tbl-wrap"><table>
+        <tr><th>对比项</th><th>SMC</th><th>传统技术分析</th></tr>
+        <tr><td>核心逻辑</td><td>跟随机构行为</td><td>看形态与指标</td></tr>
+        <tr><td>入场依据</td><td>OB / FVG / 流动性</td><td>均线 / 形态 / 支撑阻力</td></tr>
+        <tr><td>止损位置</td><td>结构之外</td><td>支撑阻力附近</td></tr>
+        <tr><td>思维方式</td><td>反散户，找猎杀</td><td>顺势或逆势</td></tr>
+      </table></div>
     </div>
   </div>
 </div>
 
 <!-- 第二章 -->
 <div class="chapter" id="ch2">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 02</div>
-    <div class="ch-title">核心概念</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 02</div><div class="ch-title">核心概念</div></div>
   <div class="ch-body">
 
     <div class="section">
       <div class="sec-title">2.1 趋势：高点与低点</div>
-      <div class="sec-body">
-        <p>价格永远是波浪式运动的，趋势就是看<strong>高点和低点在往哪个方向走</strong>。</p>
+      <div class="sec-body"><p>价格永远是波浪式运动的，趋势就是看<strong>高点和低点在往哪个方向走</strong>。</p></div>
+      <!-- 趋势图 -->
+      <div class="chart-wrap">
+        <svg viewBox="0 0 680 260" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+          <!-- 上涨 -->
+          <text x="110" y="22" text-anchor="middle" font-size="12" fill="#22c55e" font-family="monospace">上涨趋势 HH+HL</text>
+          <polyline points="30,210 70,165 110,182 155,130 195,148 240,95 280,115" fill="none" stroke="#22c55e" stroke-width="2"/>
+          <circle cx="70" cy="165" r="4" fill="#22c55e"/><text x="70" y="153" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">HH1</text>
+          <circle cx="155" cy="130" r="4" fill="#22c55e"/><text x="155" y="118" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">HH2</text>
+          <circle cx="240" cy="95" r="4" fill="#22c55e"/><text x="240" y="83" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">HH3</text>
+          <circle cx="110" cy="182" r="4" fill="none" stroke="#22c55e" stroke-width="1.5"/><text x="110" y="198" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">HL1</text>
+          <circle cx="195" cy="148" r="4" fill="none" stroke="#22c55e" stroke-width="1.5"/><text x="195" y="164" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">HL2</text>
+          <circle cx="280" cy="115" r="4" fill="none" stroke="#22c55e" stroke-width="1.5"/><text x="280" y="131" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">HL3</text>
+          <!-- 分割 -->
+          <line x1="330" y1="20" x2="330" y2="240" stroke="#232840" stroke-width="1"/>
+          <!-- 下跌 -->
+          <text x="510" y="22" text-anchor="middle" font-size="12" fill="#ef4444" font-family="monospace">下跌趋势 LH+LL</text>
+          <polyline points="350,80 390,130 430,108 475,160 515,138 560,190 600,168" fill="none" stroke="#ef4444" stroke-width="2"/>
+          <circle cx="390" cy="130" r="4" fill="none" stroke="#ef4444" stroke-width="1.5"/><text x="390" y="118" text-anchor="middle" font-size="10" fill="#ef4444" font-family="monospace">LH1</text>
+          <circle cx="475" cy="160" r="4" fill="none" stroke="#ef4444" stroke-width="1.5"/><text x="475" y="148" text-anchor="middle" font-size="10" fill="#ef4444" font-family="monospace">LH2</text>
+          <circle cx="560" cy="190" r="4" fill="none" stroke="#ef4444" stroke-width="1.5"/><text x="560" y="178" text-anchor="middle" font-size="10" fill="#ef4444" font-family="monospace">LH3</text>
+          <circle cx="430" cy="108" r="4" fill="#ef4444"/><text x="430" y="124" text-anchor="middle" font-size="10" fill="#ef4444" font-family="monospace">LL1</text>
+          <circle cx="515" cy="138" r="4" fill="#ef4444"/><text x="515" y="154" text-anchor="middle" font-size="10" fill="#ef4444" font-family="monospace">LL2</text>
+          <circle cx="600" cy="168" r="4" fill="#ef4444"/><text x="600" y="184" text-anchor="middle" font-size="10" fill="#ef4444" font-family="monospace">LL3</text>
+        </svg>
+        <div class="chart-label">左：上涨趋势（HH+HL）｜右：下跌趋势（LH+LL）</div>
       </div>
-      <div class="tbl-wrap">
-        <table>
-          <tr><th>缩写</th><th>全称</th><th>含义</th></tr>
-          <tr><td><strong style="color:var(--green)">HH</strong></td><td>Higher High</td><td>更高的高点</td></tr>
-          <tr><td><strong style="color:var(--green)">HL</strong></td><td>Higher Low</td><td>更高的低点</td></tr>
-          <tr><td><strong style="color:var(--red)">LH</strong></td><td>Lower High</td><td>更低的高点</td></tr>
-          <tr><td><strong style="color:var(--red)">LL</strong></td><td>Lower Low</td><td>更低的低点</td></tr>
-        </table>
-      </div>
-      <ul class="slist">
-        <li><strong>上涨趋势</strong> = HH + HL 交替出现，价格整体向上</li>
-        <li><strong>下跌趋势</strong> = LH + LL 交替出现，价格整体向下</li>
-        <li><strong>横盘</strong> = 高低点无规律，不交易，等方向明确</li>
-      </ul>
+      <div class="tbl-wrap"><table>
+        <tr><th>缩写</th><th>全称</th><th>含义</th></tr>
+        <tr><td><strong style="color:var(--green)">HH</strong></td><td>Higher High</td><td>更高的高点</td></tr>
+        <tr><td><strong style="color:var(--green)">HL</strong></td><td>Higher Low</td><td>更高的低点</td></tr>
+        <tr><td><strong style="color:var(--red)">LH</strong></td><td>Lower High</td><td>更低的高点</td></tr>
+        <tr><td><strong style="color:var(--red)">LL</strong></td><td>Lower Low</td><td>更低的低点</td></tr>
+      </table></div>
     </div>
 
     <div class="section">
       <div class="sec-title">2.2 BOS 与 CHoCH</div>
+      <!-- BOS/CHoCH 图 -->
+      <div class="chart-wrap">
+        <svg viewBox="0 0 680 300" xmlns="http://www.w3.org/2000/svg">
+          <!-- BOS上涨延续 -->
+          <text x="150" y="20" text-anchor="middle" font-size="12" fill="#22c55e" font-family="monospace">BOS — 趋势延续</text>
+          <polyline points="30,260 65,215 100,232 140,178 175,195 215,142 250,158 285,105" fill="none" stroke="#22c55e" stroke-width="1.8"/>
+          <line x1="30" y1="215" x2="300" y2="215" stroke="#22c55e" stroke-width="0.7" stroke-dasharray="4 3"/>
+          <line x1="30" y1="178" x2="300" y2="178" stroke="#22c55e" stroke-width="0.7" stroke-dasharray="4 3"/>
+          <line x1="30" y1="142" x2="300" y2="142" stroke="#22c55e" stroke-width="0.7" stroke-dasharray="4 3"/>
+          <rect x="264" y="205" width="36" height="16" rx="3" fill="rgba(34,197,94,0.2)"/>
+          <text x="282" y="217" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">BOS</text>
+          <rect x="264" y="168" width="36" height="16" rx="3" fill="rgba(34,197,94,0.2)"/>
+          <text x="282" y="180" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">BOS</text>
+          <rect x="264" y="132" width="36" height="16" rx="3" fill="rgba(34,197,94,0.2)"/>
+          <text x="282" y="144" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">BOS</text>
+          <!-- 分割 -->
+          <line x1="340" y1="10" x2="340" y2="290" stroke="#232840" stroke-width="1"/>
+          <!-- CHoCH -->
+          <text x="510" y="20" text-anchor="middle" font-size="12" fill="#f0c060" font-family="monospace">CHoCH — 趋势转变</text>
+          <!-- 上涨段 -->
+          <polyline points="360,250 395,205 430,222 470,172 505,190" fill="none" stroke="#22c55e" stroke-width="1.8"/>
+          <circle cx="395" cy="205" r="3" fill="#22c55e"/>
+          <circle cx="470" cy="172" r="3" fill="#22c55e"/>
+          <circle cx="430" cy="222" r="3" fill="none" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="430" y="238" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">HL</text>
+          <!-- 下跌转变 -->
+          <polyline points="505,190 535,152 568,172 605,128 640,148" fill="none" stroke="#ef4444" stroke-width="1.8"/>
+          <!-- CHoCH线：跌破HL -->
+          <line x1="360" y1="222" x2="660" y2="222" stroke="#f0c060" stroke-width="1" stroke-dasharray="5 3"/>
+          <rect x="530" y="168" width="88" height="22" rx="4" fill="rgba(240,192,96,0.15)" stroke="#f0c060" stroke-width="0.8"/>
+          <text x="574" y="183" text-anchor="middle" font-size="11" fill="#f0c060" font-family="monospace">CHoCH</text>
+          <text x="574" y="210" text-anchor="middle" font-size="10" fill="#f0c060">跌破HL = 趋势转变</text>
+        </svg>
+        <div class="chart-label">左：每次突破前高 = BOS 趋势延续｜右：跌破前低 = CHoCH 趋势转变</div>
+      </div>
       <div class="sec-body">
-        <p><strong>BOS（结构突破）</strong>：价格突破顺势方向高低点，趋势延续。<br>把它理解成：节奏没变，继续跳舞。</p>
-        <p><strong>CHoCH（结构转变）</strong>：价格突破逆势方向高低点，趋势可能反转。<br>把它理解成：音乐换了，方向要变了。</p>
+        <p><strong>BOS（结构突破）</strong>：突破顺势方向高低点，趋势延续。节奏没变，继续跳。</p>
+        <p><strong>CHoCH（结构转变）</strong>：突破逆势方向高低点，趋势可能反转。音乐换了，方向要变了。</p>
       </div>
-      <div class="tbl-wrap">
-        <table>
-          <tr><th></th><th>BOS</th><th>CHoCH</th></tr>
-          <tr><td>突破的是</td><td>顺势高/低点</td><td>逆势高/低点</td></tr>
-          <tr><td>信号意义</td><td style="color:var(--green)">趋势延续</td><td style="color:var(--gold)">趋势转变</td></tr>
-          <tr><td>操作意义</td><td>顺势持仓或入场</td><td>警惕反转，等确认</td></tr>
-        </table>
-      </div>
-      <div class="tip">CHoCH不等于立刻反手做空/做多，它是警报信号：方向可能要变了，开始寻找新方向的入场机会。</div>
+      <div class="tip">CHoCH不等于立刻反手，它是警报信号：方向可能要变了，开始寻找新方向的入场机会。</div>
     </div>
 
     <div class="section">
       <div class="sec-title">2.3 OB — 订单块</div>
-      <div class="sec-body">
-        <p>机构无法一次性建完仓，需要分批在某个价格区域吸筹。<strong>OB就是机构最后一次大量建仓的那根K线区域。</strong></p>
+      <!-- OB图 -->
+      <div class="chart-wrap">
+        <svg viewBox="0 0 680 280" xmlns="http://www.w3.org/2000/svg">
+          <!-- 看涨OB -->
+          <text x="160" y="20" text-anchor="middle" font-size="12" fill="#22c55e" font-family="monospace">看涨OB（Bullish OB）</text>
+          <!-- 下跌K线 -->
+          <rect x="40" y="60" width="14" height="50" rx="2" fill="rgba(239,68,68,0.7)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="64" y="85" width="14" height="52" rx="2" fill="rgba(239,68,68,0.7)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="88" y="110" width="14" height="55" rx="2" fill="rgba(239,68,68,0.7)" stroke="#ef4444" stroke-width="0.5"/>
+          <!-- OB阴线（蓝框） -->
+          <rect x="112" y="138" width="16" height="58" rx="2" fill="rgba(239,68,68,0.8)" stroke="#4f6ef7" stroke-width="2"/>
+          <rect x="100" y="126" width="40" height="16" rx="3" fill="rgba(79,110,247,0.2)" stroke="#4f6ef7" stroke-width="0.8"/>
+          <text x="120" y="138" text-anchor="middle" font-size="10" fill="#4f6ef7" font-family="monospace">OB</text>
+          <!-- OB区域 -->
+          <rect x="36" y="138" width="260" height="58" rx="3" fill="rgba(79,110,247,0.08)" stroke="#4f6ef7" stroke-width="0.8" stroke-dasharray="5 3"/>
+          <!-- 反转阳线 -->
+          <rect x="138" y="100" width="18" height="96" rx="2" fill="rgba(34,197,94,0.8)" stroke="#22c55e" stroke-width="1"/>
+          <!-- 上涨 -->
+          <rect x="166" y="72" width="14" height="52" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="190" y="50" width="14" height="50" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- 回调到OB -->
+          <rect x="214" y="95" width="12" height="42" rx="2" fill="rgba(239,68,68,0.5)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="236" y="128" width="12" height="48" rx="2" fill="rgba(239,68,68,0.5)" stroke="#ef4444" stroke-width="0.5"/>
+          <!-- 入场反弹 -->
+          <rect x="258" y="88" width="14" height="56" rx="2" fill="rgba(34,197,94,0.8)" stroke="#22c55e" stroke-width="0.8"/>
+          <line x1="265" y1="86" x2="265" y2="74" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr2)"/>
+          <defs><marker id="arr2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/></marker>
+          <marker id="arr3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+          <rect x="222" y="52" width="72" height="22" rx="4" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="0.5"/>
+          <text x="258" y="63" text-anchor="middle" font-size="10" fill="#22c55e">回调到OB 入场做多</text>
+          <!-- 止损线 -->
+          <line x1="36" y1="196" x2="300" y2="196" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <text x="160" y="212" text-anchor="middle" font-size="10" fill="#ef4444">止损：OB下方</text>
+
+          <!-- 分割 -->
+          <line x1="340" y1="10" x2="340" y2="270" stroke="#232840" stroke-width="1"/>
+
+          <!-- 看跌OB -->
+          <text x="510" y="20" text-anchor="middle" font-size="12" fill="#ef4444" font-family="monospace">看跌OB（Bearish OB）</text>
+          <!-- 上涨K线 -->
+          <rect x="358" y="190" width="14" height="50" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="382" y="162" width="14" height="52" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="406" y="132" width="14" height="54" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- OB阳线（蓝框） -->
+          <rect x="430" y="100" width="16" height="60" rx="2" fill="rgba(34,197,94,0.8)" stroke="#4f6ef7" stroke-width="2"/>
+          <rect x="418" y="86" width="40" height="16" rx="3" fill="rgba(79,110,247,0.2)" stroke="#4f6ef7" stroke-width="0.8"/>
+          <text x="438" y="98" text-anchor="middle" font-size="10" fill="#4f6ef7" font-family="monospace">OB</text>
+          <!-- OB区域 -->
+          <rect x="354" y="100" width="275" height="60" rx="3" fill="rgba(79,110,247,0.08)" stroke="#4f6ef7" stroke-width="0.8" stroke-dasharray="5 3"/>
+          <!-- 反转阴线 -->
+          <rect x="456" y="100" width="18" height="112" rx="2" fill="rgba(239,68,68,0.85)" stroke="#ef4444" stroke-width="1"/>
+          <!-- 下跌 -->
+          <rect x="484" y="155" width="14" height="52" rx="2" fill="rgba(239,68,68,0.7)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="508" y="180" width="14" height="50" rx="2" fill="rgba(239,68,68,0.7)" stroke="#ef4444" stroke-width="0.5"/>
+          <!-- 反弹到OB -->
+          <rect x="532" y="140" width="12" height="42" rx="2" fill="rgba(34,197,94,0.5)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="554" y="118" width="12" height="40" rx="2" fill="rgba(34,197,94,0.5)" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- 入场做空 -->
+          <rect x="576" y="148" width="14" height="55" rx="2" fill="rgba(239,68,68,0.8)" stroke="#ef4444" stroke-width="0.8"/>
+          <line x1="583" y1="150" x2="583" y2="162" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr3)"/>
+          <rect x="540" y="82" width="72" height="22" rx="4" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="0.5"/>
+          <text x="576" y="93" text-anchor="middle" font-size="10" fill="#ef4444">反弹到OB 入场做空</text>
+          <!-- 止损线 -->
+          <line x1="354" y1="90" x2="630" y2="90" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <text x="490" y="78" text-anchor="middle" font-size="10" fill="#ef4444">止损：OB上方</text>
+        </svg>
+        <div class="chart-label">看涨OB = 下跌段最后一根阴线（蓝框）｜看跌OB = 上涨段最后一根阳线（蓝框）</div>
       </div>
       <ul class="slist">
-        <li><strong>看涨OB</strong>：下跌段最后一根阴线的实体区域，之后价格反转向上</li>
-        <li><strong>看跌OB</strong>：上涨段最后一根阳线的实体区域，之后价格反转向下</li>
+        <li><strong>看涨OB</strong>：下跌段最后一根阴线实体区域，之后价格反转向上</li>
+        <li><strong>看跌OB</strong>：上涨段最后一根阳线实体区域，之后价格反转向下</li>
+        <li>OB被价格多次穿越后失效，不再使用</li>
       </ul>
-      <div class="tip gold">OB永远是反转前的那根反向K线，不是每根下跌/上涨K线都是OB。</div>
-      <div class="sec-body" style="margin-top:10px"><p><strong>OB有效性判断：</strong></p></div>
-      <ul class="slist">
-        <li>OB之后有明显的大幅推进（离开OB的K线越大越好）</li>
-        <li>OB位于折价区（看涨）或溢价区（看跌）</li>
-        <li>OB未被价格多次穿越（穿越超过一次视为失效）</li>
-        <li>OB与FVG重叠时信号最强</li>
-      </ul>
+      <div class="tip gold">OB永远是反转前那根反向K线，不是每根下跌/上涨K线都是OB。</div>
     </div>
 
     <div class="section">
       <div class="sec-title">2.4 FVG — 公平价值缺口</div>
-      <div class="sec-body">
-        <p>三根K线之间，<strong>第一根最高价与第三根最低价之间</strong>存在没有交易的空白区域，即为FVG。代表机构快速推进，价格跳过了这段。</p>
+      <div class="chart-wrap">
+        <svg viewBox="0 0 680 220" xmlns="http://www.w3.org/2000/svg">
+          <!-- K线 -->
+          <rect x="80" y="140" width="16" height="50" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <line x1="88" y1="130" x2="88" y2="140" stroke="#22c55e" stroke-width="1"/>
+          <line x1="88" y1="190" x2="88" y2="200" stroke="#22c55e" stroke-width="1"/>
+          <text x="88" y="214" text-anchor="middle" font-size="10" fill="#8892b0" font-family="monospace">K1</text>
+          <!-- 大阳线 -->
+          <rect x="118" y="58" width="24" height="110" rx="2" fill="rgba(34,197,94,0.85)" stroke="#22c55e" stroke-width="1.2"/>
+          <line x1="130" y1="45" x2="130" y2="58" stroke="#22c55e" stroke-width="1.5"/>
+          <line x1="130" y1="168" x2="130" y2="180" stroke="#22c55e" stroke-width="1"/>
+          <text x="130" y="214" text-anchor="middle" font-size="10" fill="#8892b0" font-family="monospace">K2（大阳线）</text>
+          <!-- K3 -->
+          <rect x="160" y="38" width="16" height="45" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <line x1="168" y1="28" x2="168" y2="38" stroke="#22c55e" stroke-width="1"/>
+          <line x1="168" y1="83" x2="168" y2="92" stroke="#22c55e" stroke-width="1"/>
+          <text x="168" y="214" text-anchor="middle" font-size="10" fill="#8892b0" font-family="monospace">K3</text>
+          <!-- FVG区域 -->
+          <rect x="76" y="83" width="110" height="57" rx="3" fill="rgba(79,110,247,0.15)" stroke="#4f6ef7" stroke-width="1" stroke-dasharray="5 3"/>
+          <text x="131" y="108" text-anchor="middle" font-size="13" fill="#4f6ef7" font-family="monospace" font-weight="600">FVG</text>
+          <text x="131" y="124" text-anchor="middle" font-size="10" fill="#4f6ef7">K1最高 到 K3最低</text>
+          <!-- K1最高标线 -->
+          <line x1="76" y1="140" x2="280" y2="140" stroke="#8892b0" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <text x="285" y="144" font-size="9" fill="#8892b0">K1最高</text>
+          <!-- K3最低标线 -->
+          <line x1="76" y1="83" x2="280" y2="83" stroke="#8892b0" stroke-width="0.5" stroke-dasharray="3 3"/>
+          <text x="285" y="87" font-size="9" fill="#8892b0">K3最低</text>
+          <!-- 回调K线 -->
+          <rect x="200" y="65" width="14" height="42" rx="2" fill="rgba(239,68,68,0.6)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="224" y="92" width="14" height="48" rx="2" fill="rgba(239,68,68,0.55)" stroke="#ef4444" stroke-width="0.5"/>
+          <!-- 触碰FVG -->
+          <path d="M231 140 Q233 152 248 148" fill="none" stroke="#4f6ef7" stroke-width="1.2"/>
+          <!-- 反弹 -->
+          <rect x="248" y="72" width="14" height="68" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.8"/>
+          <rect x="272" y="48" width="14" height="60" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.8"/>
+          <!-- 说明 -->
+          <rect x="380" y="50" width="260" height="140" rx="8" fill="rgba(79,110,247,0.06)" stroke="#232840" stroke-width="1"/>
+          <text x="510" y="76" text-anchor="middle" font-size="13" fill="#e8eaf6" font-weight="600">FVG 形成原理</text>
+          <text x="395" y="102" font-size="11" fill="#8892b0">① K2大阳线机构快速推进</text>
+          <text x="395" y="122" font-size="11" fill="#8892b0">② K1最高与K3最低之间</text>
+          <text x="395" y="138" font-size="11" fill="#8892b0">   留下未交易的空白</text>
+          <text x="395" y="158" font-size="11" fill="#8892b0">③ 价格回补FVG后</text>
+          <text x="395" y="174" font-size="11" fill="#22c55e">   继续原方向运行</text>
+        </svg>
+        <div class="chart-label">三根K线之间的未交易空白区域 = FVG，价格回补后往往继续原方向</div>
       </div>
-      <ul class="slist">
-        <li>FVG形成：机构买单太猛，中间价格直接被跳过</li>
-        <li>FVG回补：那段区域有未成交挂单，机构想在更好的价格补仓</li>
-        <li>价格通常会回调填补FVG后，继续原方向运行</li>
-      </ul>
     </div>
 
     <div class="section">
       <div class="sec-title">2.5 折价区与溢价区</div>
-      <div class="tbl-wrap">
-        <table>
-          <tr><th>区域</th><th>位置</th><th>操作</th><th>逻辑</th></tr>
-          <tr><td><strong style="color:var(--green)">折价区</strong></td><td>低于50%</td><td style="color:var(--green)">适合做多</td><td>价格打折，便宜买</td></tr>
-          <tr><td><strong style="color:var(--red)">溢价区</strong></td><td>高于50%</td><td style="color:var(--red)">适合做空</td><td>价格溢价，贵了卖</td></tr>
-        </table>
+      <div class="chart-wrap">
+        <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+          <!-- 区间框 -->
+          <rect x="60" y="30" width="280" height="180" rx="6" fill="none" stroke="#232840" stroke-width="1"/>
+          <!-- 溢价区 -->
+          <rect x="60" y="30" width="280" height="90" rx="6" fill="rgba(239,68,68,0.07)"/>
+          <text x="200" y="72" text-anchor="middle" font-size="15" fill="#ef4444" font-weight="600">溢价区 Premium</text>
+          <text x="200" y="92" text-anchor="middle" font-size="12" fill="#ef4444">高于50% → 适合做空</text>
+          <!-- 折价区 -->
+          <rect x="60" y="120" width="280" height="90" rx="6" fill="rgba(34,197,94,0.07)"/>
+          <text x="200" y="162" text-anchor="middle" font-size="15" fill="#22c55e" font-weight="600">折价区 Discount</text>
+          <text x="200" y="182" text-anchor="middle" font-size="12" fill="#22c55e">低于50% → 适合做多</text>
+          <!-- 三条线 -->
+          <line x1="44" y1="30" x2="356" y2="30" stroke="#ef4444" stroke-width="1.5"/>
+          <text x="36" y="34" text-anchor="end" font-size="10" fill="#ef4444">100%</text>
+          <line x1="44" y1="120" x2="356" y2="120" stroke="#8892b0" stroke-width="1.2" stroke-dasharray="6 3"/>
+          <text x="36" y="124" text-anchor="end" font-size="10" fill="#8892b0">50%</text>
+          <line x1="44" y1="210" x2="356" y2="210" stroke="#22c55e" stroke-width="1.5"/>
+          <text x="36" y="214" text-anchor="end" font-size="10" fill="#22c55e">0%</text>
+          <!-- 说明 -->
+          <rect x="390" y="40" width="252" height="160" rx="8" fill="rgba(17,20,30,0.8)" stroke="#232840" stroke-width="1"/>
+          <text x="516" y="68" text-anchor="middle" font-size="13" fill="#e8eaf6" font-weight="600">为什么这样划分？</text>
+          <text x="404" y="94" font-size="11" fill="#8892b0">折价区做多 → 目标溢价区</text>
+          <text x="404" y="112" font-size="11" fill="#8892b0">溢价区做空 → 目标折价区</text>
+          <text x="404" y="136" font-size="11" fill="#8892b0">入场在便宜位，目标在贵的位</text>
+          <text x="404" y="154" font-size="11" fill="#8892b0">盈亏比天然 ≥ 1:2</text>
+          <text x="404" y="178" font-size="11" fill="#f0c060">宁可错过，不在溢价区追多</text>
+        </svg>
+        <div class="chart-label">以最近波动高低点为基准，50%以下=折价做多，50%以上=溢价做空</div>
       </div>
-      <div class="tip green">在折价区做多、溢价区做空，目标打到对面，盈亏比天然可以达到1:2以上。</div>
     </div>
 
     <div class="section">
       <div class="sec-title">2.6 流动性</div>
-      <div class="sec-body">
-        <p>机构建大仓需要大量对手盘。散户止损聚集的地方就是流动性池，机构会主动把价格推过去触发止损，再反向运行，这叫<strong>猎杀止损（Stop Hunt）</strong>。</p>
+      <div class="chart-wrap">
+        <svg viewBox="0 0 680 240" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr4" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/></marker>
+          <marker id="arr5" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto-start-reverse"><path d="M2 1L8 5L2 9" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+          <!-- 前高线 -->
+          <line x1="40" y1="60" x2="640" y2="60" stroke="#ef4444" stroke-width="1" stroke-dasharray="5 3"/>
+          <rect x="40" y="40" width="200" height="20" rx="3" fill="rgba(239,68,68,0.12)"/>
+          <text x="140" y="54" text-anchor="middle" font-size="11" fill="#ef4444">前高上方 = 空头止损聚集（卖方流动性）</text>
+          <!-- 前低线 -->
+          <line x1="40" y1="180" x2="640" y2="180" stroke="#22c55e" stroke-width="1" stroke-dasharray="5 3"/>
+          <rect x="40" y="180" width="200" height="20" rx="3" fill="rgba(34,197,94,0.12)"/>
+          <text x="140" y="194" text-anchor="middle" font-size="11" fill="#22c55e">前低下方 = 多头止损聚集（买方流动性）</text>
+          <!-- K线 上涨猎杀前高 -->
+          <rect x="280" y="130" width="14" height="55" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="304" y="98" width="14" height="60" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- 猎杀大阳线 突破前高 -->
+          <rect x="328" y="28" width="18" height="90" rx="2" fill="rgba(34,197,94,0.85)" stroke="#22c55e" stroke-width="1"/>
+          <line x1="337" y1="20" x2="337" y2="28" stroke="#22c55e" stroke-width="1.5"/>
+          <!-- 猎杀标注 -->
+          <line x1="337" y1="18" x2="337" y2="8" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr4)"/>
+          <rect x="290" y="0" width="96" height="16" rx="3" fill="rgba(239,68,68,0.2)"/>
+          <text x="338" y="12" text-anchor="middle" font-size="10" fill="#ef4444">猎杀止损！</text>
+          <!-- 反转大阴线 -->
+          <rect x="356" y="45" width="18" height="110" rx="2" fill="rgba(239,68,68,0.85)" stroke="#ef4444" stroke-width="1"/>
+          <line x1="365" y1="35" x2="365" y2="45" stroke="#ef4444" stroke-width="1"/>
+          <line x1="365" y1="155" x2="365" y2="168" stroke="#ef4444" stroke-width="1.5"/>
+          <!-- 继续下跌 -->
+          <rect x="384" y="110" width="14" height="68" rx="2" fill="rgba(239,68,68,0.7)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="408" y="140" width="14" height="58" rx="2" fill="rgba(239,68,68,0.65)" stroke="#ef4444" stroke-width="0.5"/>
+          <!-- 说明箭头 -->
+          <text x="500" y="105" text-anchor="middle" font-size="11" fill="#8892b0">机构流程：</text>
+          <text x="500" y="122" text-anchor="middle" font-size="11" fill="#8892b0">① 推价格到前高上方</text>
+          <text x="500" y="139" text-anchor="middle" font-size="11" fill="#8892b0">② 触发空头止损（大量买单）</text>
+          <text x="500" y="156" text-anchor="middle" font-size="11" fill="#8892b0">③ 用买单建空仓</text>
+          <text x="500" y="173" text-anchor="middle" font-size="11" fill="#ef4444">④ 反转向下</text>
+        </svg>
+        <div class="chart-label">机构推价到流动性密集处猎杀止损，再反向建仓</div>
       </div>
-      <ul class="slist">
-        <li><strong>前高上方</strong> = 空头止损堆积（卖方流动性）→ 机构在此建空</li>
-        <li><strong>前低下方</strong> = 多头止损堆积（买方流动性）→ 机构在此建多</li>
-        <li><strong>等量高点EQH / 等量低点EQL</strong> = 流动性最密集的位置</li>
-      </ul>
     </div>
 
   </div>
@@ -466,62 +445,84 @@ footer {
 
 <!-- 第三章 -->
 <div class="chapter" id="ch3">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 03</div>
-    <div class="ch-title">完整入场流程</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 03</div><div class="ch-title">完整入场流程</div></div>
   <div class="ch-body">
     <div class="section">
       <div class="sec-body"><p>以做多为例。六个步骤必须全部满足，任何一步不达标就放弃，等下一个机会。</p></div>
+      <!-- 完整入场流程图 -->
+      <div class="chart-wrap">
+        <svg viewBox="0 0 680 420" xmlns="http://www.w3.org/2000/svg">
+          <defs><marker id="arr6" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/></marker>
+          <marker id="arr7" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/></marker></defs>
+          <!-- 目标流动性线 -->
+          <line x1="40" y1="40" x2="500" y2="40" stroke="#ef4444" stroke-width="1" stroke-dasharray="5 3"/>
+          <text x="510" y="44" font-size="10" fill="#ef4444">目标：前高流动性</text>
+          <!-- 50%线 -->
+          <line x1="40" y1="200" x2="500" y2="200" stroke="#8892b0" stroke-width="0.8" stroke-dasharray="4 4"/>
+          <text x="510" y="204" font-size="10" fill="#8892b0">50% 均衡</text>
+          <!-- OB/FVG区域 -->
+          <rect x="40" y="265" width="460" height="50" rx="4" fill="rgba(79,110,247,0.1)" stroke="#4f6ef7" stroke-width="0.8" stroke-dasharray="5 3"/>
+          <text x="510" y="286" font-size="10" fill="#4f6ef7">OB/FVG</text>
+          <text x="510" y="300" font-size="10" fill="#4f6ef7">入场区</text>
+          <!-- 止损线 -->
+          <line x1="40" y1="340" x2="500" y2="340" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <text x="510" y="344" font-size="10" fill="#ef4444">止损位</text>
+          <!-- 折价区背景 -->
+          <rect x="40" y="200" width="460" height="140" rx="4" fill="rgba(34,197,94,0.04)"/>
+          <!-- K线：大周期上涨 -->
+          <rect x="55" y="310" width="12" height="42" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="77" y="278" width="12" height="48" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="99" y="248" width="12" height="50" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <text x="80" y="368" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">步骤1: 大周期看多</text>
+          <!-- 回调段 -->
+          <rect x="130" y="165" width="14" height="72" rx="2" fill="rgba(239,68,68,0.75)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="154" y="220" width="14" height="65" rx="2" fill="rgba(239,68,68,0.7)" stroke="#ef4444" stroke-width="0.5"/>
+          <!-- OB阴线 -->
+          <rect x="178" y="265" width="14" height="55" rx="2" fill="rgba(239,68,68,0.8)" stroke="#4f6ef7" stroke-width="1.5"/>
+          <!-- CHoCH大阳线 -->
+          <rect x="202" y="178" width="16" height="107" rx="2" fill="rgba(34,197,94,0.85)" stroke="#22c55e" stroke-width="1.2"/>
+          <!-- CHoCH标注 -->
+          <line x1="130" y1="200" x2="224" y2="200" stroke="#22c55e" stroke-width="0.8" stroke-dasharray="4 2"/>
+          <line x1="210" y1="176" x2="210" y2="164" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr6)"/>
+          <rect x="162" y="142" width="100" height="22" rx="4" fill="rgba(34,197,94,0.15)" stroke="#22c55e" stroke-width="0.5"/>
+          <text x="212" y="157" text-anchor="middle" font-size="10" fill="#22c55e" font-weight="600">CHoCH 确认</text>
+          <text x="212" y="136" text-anchor="middle" font-size="9" fill="#22c55e">步骤2: 等CHoCH</text>
+          <!-- 回调进OB -->
+          <rect x="230" y="235" width="12" height="46" rx="2" fill="rgba(239,68,68,0.55)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="252" y="268" width="12" height="50" rx="2" fill="rgba(239,68,68,0.5)" stroke="#ef4444" stroke-width="0.5"/>
+          <text x="240" y="368" text-anchor="middle" font-size="10" fill="#4f6ef7" font-family="monospace">步骤3+4: 折价区+OB</text>
+          <!-- 小周期确认 -->
+          <rect x="276" y="288" width="10" height="28" rx="1" fill="rgba(239,68,68,0.45)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="296" y="300" width="10" height="24" rx="1" fill="rgba(239,68,68,0.4)" stroke="#ef4444" stroke-width="0.5"/>
+          <rect x="316" y="270" width="12" height="32" rx="1" fill="rgba(34,197,94,0.8)" stroke="#22c55e" stroke-width="0.8"/>
+          <line x1="322" y1="268" x2="322" y2="256" stroke="#22c55e" stroke-width="1.5" marker-end="url(#arr6)"/>
+          <text x="315" y="368" text-anchor="middle" font-size="10" fill="#22c55e" font-family="monospace">步骤5: 小周期确认</text>
+          <!-- 上涨段 -->
+          <rect x="340" y="232" width="12" height="52" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="362" y="190" width="12" height="56" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="384" y="148" width="12" height="58" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="406" y="102" width="12" height="62" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="428" y="60" width="12" height="58" rx="2" fill="rgba(34,197,94,0.8)" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- 目标到达 -->
+          <line x1="434" y1="58" x2="434" y2="46" stroke="#ef4444" stroke-width="1.5" marker-end="url(#arr7)"/>
+          <text x="400" y="368" text-anchor="middle" font-size="10" fill="#ef4444" font-family="monospace">步骤6: 止损+目标</text>
+          <!-- 盈亏比 -->
+          <line x1="468" y1="40" x2="468" y2="340" stroke="#8892b0" stroke-width="0.8"/>
+          <line x1="462" y1="40" x2="474" y2="40" stroke="#8892b0" stroke-width="0.8"/>
+          <line x1="462" y1="290" x2="474" y2="290" stroke="#8892b0" stroke-width="0.8"/>
+          <line x1="462" y1="340" x2="474" y2="340" stroke="#8892b0" stroke-width="0.8"/>
+          <text x="482" y="170" font-size="10" fill="#22c55e">盈</text>
+          <text x="482" y="318" font-size="10" fill="#ef4444">亏</text>
+        </svg>
+        <div class="chart-label">从大周期判断方向，到CHoCH确认、OB/FVG入场、小周期确认、设止损目标的完整流程</div>
+      </div>
       <div class="steps">
-        <div class="step">
-          <div class="step-num">1</div>
-          <div class="step-content">
-            <div class="step-title">大周期定方向</div>
-            <div class="step-desc">确认 HH+HL 上涨结构。大周期看多只找做多，横盘不交易。</div>
-            <span class="step-tag">日线 / 4H</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">2</div>
-          <div class="step-content">
-            <div class="step-title">等待 CHoCH 确认</div>
-            <div class="step-desc">等回调段的下跌结构被打破，多头重新接管。没有CHoCH就继续等。</div>
-            <span class="step-tag">4H / 1H</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">3</div>
-          <div class="step-content">
-            <div class="step-title">确认在折价区</div>
-            <div class="step-desc">做多入场点必须在50%区间以下。溢价区出现CHoCH则盈亏比不好，跳过。</div>
-            <span class="step-tag">4H / 1H</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">4</div>
-          <div class="step-content">
-            <div class="step-title">找 OB 或 FVG</div>
-            <div class="step-desc">在CHoCH前的下跌里找OB（最后一根阴线）或FVG（K线缺口）。两者重叠最强。等价格回调进入区域。</div>
-            <span class="step-tag">1H / 15分钟</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">5</div>
-          <div class="step-content">
-            <div class="step-title">小周期确认</div>
-            <div class="step-desc">切到小周期，等小CHoCH、吞没阳线或长下影线任意一个信号后入场。</div>
-            <span class="step-tag">15分钟 / 5分钟</span>
-          </div>
-        </div>
-        <div class="step">
-          <div class="step-num">6</div>
-          <div class="step-content">
-            <div class="step-title">设止损与目标</div>
-            <div class="step-desc">止损放OB实体下方，目标看上方前高流动性。盈亏比必须≥1:2才进场。</div>
-            <span class="step-tag">入场周期</span>
-          </div>
-        </div>
+        <div class="step"><div class="step-num">1</div><div class="step-content"><div class="step-title">大周期定方向</div><div class="step-desc">确认HH+HL上涨结构。大周期看多只找做多，横盘不交易。</div><span class="step-tag">日线 / 4H</span></div></div>
+        <div class="step"><div class="step-num">2</div><div class="step-content"><div class="step-title">等待 CHoCH 确认</div><div class="step-desc">等回调段的下跌结构被打破，多头重新接管。没有CHoCH就继续等。</div><span class="step-tag">4H / 1H</span></div></div>
+        <div class="step"><div class="step-num">3</div><div class="step-content"><div class="step-title">确认在折价区</div><div class="step-desc">做多入场点必须在50%以下。溢价区出现CHoCH则盈亏比不好，跳过。</div><span class="step-tag">4H / 1H</span></div></div>
+        <div class="step"><div class="step-num">4</div><div class="step-content"><div class="step-title">找 OB 或 FVG</div><div class="step-desc">在CHoCH前的下跌里找OB（最后一根阴线）或FVG（K线缺口）。两者重叠最强。等价格回调进入区域。</div><span class="step-tag">1H / 15分钟</span></div></div>
+        <div class="step"><div class="step-num">5</div><div class="step-content"><div class="step-title">小周期确认</div><div class="step-desc">切到小周期，等小CHoCH、吞没阳线或长下影线任意一个信号后入场。</div><span class="step-tag">15分钟 / 5分钟</span></div></div>
+        <div class="step"><div class="step-num">6</div><div class="step-content"><div class="step-title">设止损与目标</div><div class="step-desc">止损放OB实体下方，目标看上方前高流动性。盈亏比必须≥1:2才进场。</div><span class="step-tag">入场周期</span></div></div>
       </div>
     </div>
   </div>
@@ -529,15 +530,10 @@ footer {
 
 <!-- 第四章 -->
 <div class="chapter" id="ch4">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 04</div>
-    <div class="ch-title">止损设置</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 04</div><div class="ch-title">止损设置</div></div>
   <div class="ch-body">
     <div class="section">
-      <div class="sec-body">
-        <p>止损位置要放在「如果价格到了这里，说明判断彻底错了」的地方。</p>
-      </div>
+      <div class="sec-body"><p>止损位置要放在「如果价格到了这里，说明判断彻底错了」的地方。</p></div>
       <ul class="slist">
         <li><strong>看涨OB做多</strong> → 止损放在OB实体下方</li>
         <li><strong>看跌OB做空</strong> → 止损放在OB实体上方</li>
@@ -551,205 +547,156 @@ footer {
 
 <!-- 第五章 -->
 <div class="chapter" id="ch5">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 05</div>
-    <div class="ch-title">止盈设置</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 05</div><div class="ch-title">止盈设置</div></div>
   <div class="ch-body">
     <div class="section">
       <div class="sec-body"><p>止盈不是随便设个价格，而是找下一个机构会取走流动性的地方——那里有大量抛压，价格到了容易遇阻。</p></div>
-      <div class="tip gold">止盈目标：用入场周期或大一级周期的图，找最近的前高作为目标。</div>
-    </div>
-    <div class="section">
-      <div class="sec-title">三种止盈方法</div>
+      <!-- 三种止盈图 -->
+      <div class="chart-wrap">
+        <svg viewBox="0 0 680 320" xmlns="http://www.w3.org/2000/svg">
+          <defs>
+            <marker id="tp1" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#22c55e" stroke-width="1.5" stroke-linecap="round"/></marker>
+            <marker id="tp2" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#ef4444" stroke-width="1.5" stroke-linecap="round"/></marker>
+            <marker id="tp3" viewBox="0 0 10 10" refX="8" refY="5" markerWidth="5" markerHeight="5" orient="auto"><path d="M2 1L8 5L2 9" fill="none" stroke="#f0c060" stroke-width="1.5" stroke-linecap="round"/></marker>
+          </defs>
+          <!-- 方法一：流动性止盈 -->
+          <text x="100" y="18" text-anchor="middle" font-size="11" fill="#4f6ef7" font-family="monospace">方法一：打到流动性</text>
+          <line x1="30" y1="40" x2="200" y2="40" stroke="#ef4444" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="205" y="44" font-size="9" fill="#ef4444">止盈目标</text>
+          <line x1="30" y1="200" x2="200" y2="200" stroke="#22c55e" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <text x="205" y="204" font-size="9" fill="#22c55e">入场</text>
+          <line x1="30" y1="240" x2="200" y2="240" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <text x="205" y="244" font-size="9" fill="#ef4444">止损</text>
+          <rect x="40" y="210" width="12" height="42" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="62" y="178" width="12" height="46" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="84" y="148" width="12" height="50" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="106" y="108" width="12" height="56" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="128" y="68" width="12" height="56" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="150" y="38" width="12" height="42" rx="2" fill="rgba(239,68,68,0.7)" stroke="#ef4444" stroke-width="0.5"/>
+          <line x1="156" y1="36" x2="156" y2="24" stroke="#22c55e" stroke-width="1.5" marker-end="url(#tp1)"/>
+          <text x="100" y="270" text-anchor="middle" font-size="10" fill="#22c55e">全部平仓离场</text>
+
+          <!-- 分割 -->
+          <line x1="230" y1="10" x2="230" y2="310" stroke="#232840" stroke-width="1"/>
+
+          <!-- 方法二：分批止盈 -->
+          <text x="360" y="18" text-anchor="middle" font-size="11" fill="#4f6ef7" font-family="monospace">方法二：分批止盈</text>
+          <line x1="240" y1="40" x2="470" y2="40" stroke="#ef4444" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="474" y="44" font-size="9" fill="#ef4444">目标2（远）</text>
+          <line x1="240" y1="110" x2="470" y2="110" stroke="#f0c060" stroke-width="1" stroke-dasharray="4 3"/>
+          <text x="474" y="114" font-size="9" fill="#f0c060">目标1（近）</text>
+          <line x1="240" y1="200" x2="470" y2="200" stroke="#22c55e" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <line x1="240" y1="240" x2="470" y2="240" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3 3"/>
+          <rect x="250" y="210" width="12" height="42" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="272" y="175" width="12" height="48" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="294" y="138" width="12" height="52" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="316" y="98" width="12" height="52" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- 第一批止盈 -->
+          <line x1="322" y1="96" x2="322" y2="84" stroke="#f0c060" stroke-width="1.5" marker-end="url(#tp3)"/>
+          <rect x="290" y="66" width="70" height="18" rx="4" fill="rgba(240,192,96,0.15)" stroke="#f0c060" stroke-width="0.5"/>
+          <text x="325" y="79" text-anchor="middle" font-size="9" fill="#f0c060">50% 平仓</text>
+          <!-- 继续上涨 -->
+          <rect x="338" y="68" width="12" height="44" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="360" y="42" width="12" height="40" rx="2" fill="rgba(34,197,94,0.8)" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- 第二批止盈 -->
+          <line x1="366" y1="40" x2="366" y2="28" stroke="#ef4444" stroke-width="1.5" marker-end="url(#tp2)"/>
+          <rect x="334" y="12" width="70" height="16" rx="4" fill="rgba(239,68,68,0.15)" stroke="#ef4444" stroke-width="0.5"/>
+          <text x="369" y="24" text-anchor="middle" font-size="9" fill="#ef4444">50% 平仓</text>
+          <text x="355" y="270" text-anchor="middle" font-size="10" fill="#f0c060">两批出场，兼顾安全和利润</text>
+
+          <!-- 分割 -->
+          <line x1="510" y1="10" x2="510" y2="310" stroke="#232840" stroke-width="1"/>
+
+          <!-- 方法三：跟踪止损 -->
+          <text x="590" y="18" text-anchor="middle" font-size="11" fill="#4f6ef7" font-family="monospace">方法三：跟踪止损</text>
+          <rect x="520" y="260" width="12" height="42" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="542" y="220" width="12" height="52" rx="2" fill="rgba(34,197,94,0.7)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="564" y="178" width="12" height="56" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="586" y="135" width="12" height="58" rx="2" fill="rgba(34,197,94,0.75)" stroke="#22c55e" stroke-width="0.5"/>
+          <rect x="608" y="95" width="12" height="58" rx="2" fill="rgba(34,197,94,0.8)" stroke="#22c55e" stroke-width="0.5"/>
+          <!-- 跟踪止损线 -->
+          <line x1="515" y1="290" x2="660" y2="290" stroke="#ef4444" stroke-width="0.6" stroke-dasharray="3 3" opacity="0.4"/>
+          <line x1="515" y1="260" x2="660" y2="260" stroke="#ef4444" stroke-width="0.7" stroke-dasharray="3 3" opacity="0.6"/>
+          <line x1="515" y1="225" x2="660" y2="225" stroke="#ef4444" stroke-width="0.8" stroke-dasharray="3 3" opacity="0.8"/>
+          <line x1="515" y1="185" x2="660" y2="185" stroke="#ef4444" stroke-width="1" stroke-dasharray="3 3"/>
+          <text x="515" y="304" font-size="8" fill="#ef4444" opacity="0.5">初始止损</text>
+          <text x="515" y="256" font-size="8" fill="#ef4444" opacity="0.6">上移①</text>
+          <text x="515" y="221" font-size="8" fill="#ef4444" opacity="0.8">上移②</text>
+          <text x="515" y="181" font-size="8" fill="#ef4444">上移③（触发）</text>
+          <!-- 回调触发 -->
+          <rect x="630" y="175" width="12" height="60" rx="2" fill="rgba(239,68,68,0.75)" stroke="#ef4444" stroke-width="0.8"/>
+          <text x="590" y="270" text-anchor="middle" font-size="10" fill="#f0c060">止损上移跟随，自然离场</text>
+        </svg>
+        <div class="chart-label">方法一：快进快出｜方法二：最稳健，分两批｜方法三：强趋势行情用</div>
+      </div>
+      <div class="tip gold">止盈目标用入场周期或大一级周期的图找前高，不是用固定某一条线。</div>
       <div class="tp-cards">
         <div class="tp-card">
-          <div class="tp-header">
-            <span class="tp-badge" style="background:rgba(79,110,247,0.15);color:var(--accent)">方法一</span>
-            <span class="tp-name">打到流动性就走</span>
-          </div>
-          <div class="tp-body">
-            找入场点上方最近的前高，目标设在前高上方一点点。<br>
-            <strong style="color:var(--text)">适合：</strong>震荡行情，快进快出。打到就走，不要贪。
-          </div>
+          <div class="tp-header"><span class="tp-badge" style="background:rgba(79,110,247,0.15);color:var(--accent)">方法一</span><span class="tp-name">打到流动性就走</span></div>
+          <div class="tp-body">找入场点上方最近的前高，目标在前高上方一点点。适合震荡行情，打到就走，不贪。</div>
         </div>
         <div class="tp-card">
-          <div class="tp-header">
-            <span class="tp-badge" style="background:rgba(34,197,94,0.15);color:var(--green)">方法二</span>
-            <span class="tp-name">分批止盈（最稳健）</span>
-          </div>
-          <div class="tp-body">
-            <strong style="color:var(--green)">第一批 50%</strong>：打到最近流动性，锁住基本利润。<br>
-            <strong style="color:var(--green)">第二批 50%</strong>：等价格继续推进，打到更远目标。<br>
-            第一批止盈后心态放松，剩余仓位可以安心持有。
-          </div>
+          <div class="tp-header"><span class="tp-badge" style="background:rgba(34,197,94,0.15);color:var(--green)">方法二</span><span class="tp-name">分批止盈（最稳健）</span></div>
+          <div class="tp-body"><strong style="color:var(--green)">第一批50%</strong>：打到最近流动性，锁住基本利润。<br><strong style="color:var(--green)">第二批50%</strong>：等价格继续推进打到更远目标。</div>
         </div>
         <div class="tp-card">
-          <div class="tp-header">
-            <span class="tp-badge" style="background:rgba(240,192,96,0.15);color:var(--gold)">方法三</span>
-            <span class="tp-name">跟踪止损</span>
-          </div>
-          <div class="tp-body">
-            <strong style="color:var(--text)">适合：</strong>强趋势行情，不想过早离场。<br>
-            每当价格创出新HL，把止损移到新HL下方。价格继续涨，止损跟着移。直到价格回调打到止损，自然出场。
-          </div>
+          <div class="tp-header"><span class="tp-badge" style="background:rgba(240,192,96,0.15);color:var(--gold)">方法三</span><span class="tp-name">跟踪止损</span></div>
+          <div class="tp-body">适合强趋势行情。每当价格创出新HL，把止损移到新HL下方。直到回调打到止损自然出场。</div>
         </div>
       </div>
-    </div>
-    <div class="section">
-      <div class="sec-title">用哪个周期找目标</div>
-      <div class="tbl-wrap">
-        <table>
-          <tr><th>入场周期</th><th>近目标（第一批）</th><th>远目标（第二批）</th></tr>
-          <tr><td>4H</td><td>4H 最近前高</td><td>日线 明显前高</td></tr>
-          <tr><td>1H</td><td>1H 最近前高</td><td>4H 明显前高</td></tr>
-          <tr><td>15分钟</td><td>15分钟 最近前高</td><td>1H 明显前高</td></tr>
-        </table>
-      </div>
-    </div>
-    <div class="section">
-      <div class="sec-title">常见止盈错误</div>
-      <ul class="slist">
-        <li><strong>目标设太远</strong>：浮盈回撤变亏损。宁愿少吃，不要吐回去</li>
-        <li><strong>提前止盈</strong>：至少等到第一个流动性位再说</li>
-        <li><strong>没有计划就进场</strong>：进场前必须想好第一、第二目标在哪</li>
-      </ul>
     </div>
   </div>
 </div>
 
 <!-- 第六章 -->
 <div class="chapter" id="ch6">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 06</div>
-    <div class="ch-title">六大失败案例</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 06</div><div class="ch-title">六大失败案例</div></div>
   <div class="ch-body">
     <div class="err-cards">
-      <div class="err-card">
-        <div class="err-title">错误1 — 没看大周期就进场</div>
-        <div class="err-body">在15分钟图看到OB直接买，结果日线是下跌趋势，小周期上涨只是大跌中的反弹。</div>
-        <div class="err-fix">▸ 永远从大周期往小周期分析，不要反过来</div>
-      </div>
-      <div class="err-card">
-        <div class="err-title">错误2 — 把每根阴线都当OB</div>
-        <div class="err-body">下跌10根K线全部标成OB，结果不知道在哪里进场。OB只有一个，是推动反转的最后那根。</div>
-        <div class="err-fix">▸ 只标推动反转的那根最后反向K线</div>
-      </div>
-      <div class="err-card">
-        <div class="err-title">错误3 — 没等CHoCH就抄底</div>
-        <div class="err-body">价格进入OB区域直接买，被止损出场后价格才真正反弹。进入OB不等于反转已确认。</div>
-        <div class="err-fix">▸ 等小周期结构反转信号再进场</div>
-      </div>
-      <div class="err-card">
-        <div class="err-title">错误4 — 溢价区追多</div>
-        <div class="err-body">大周期看多，在溢价区追进，稍微回调就被止损出场，然后价格才继续涨。</div>
-        <div class="err-fix">▸ 宁可错过一段，等折价区的机会</div>
-      </div>
-      <div class="err-card">
-        <div class="err-title">错误5 — 用失效的OB</div>
-        <div class="err-body">OB被价格来回穿越三次还用，结果直接跌穿。OB就像弹簧，弹多了就没力了。</div>
-        <div class="err-fix">▸ OB被价格穿越超过一次后放弃</div>
-      </div>
-      <div class="err-card">
-        <div class="err-title">错误6 — 盈亏比不足还进场</div>
-        <div class="err-body">所有条件满足但盈亏比只有1:1.2，长期来看无法弥补亏损的几次。</div>
-        <div class="err-fix">▸ 盈亏比低于1:2直接跳过，不管信号多完美</div>
-      </div>
+      <div class="err-card"><div class="err-title">错误1 — 没看大周期就进场</div><div class="err-body">在15分钟图看到OB直接买，结果日线是下跌趋势，小周期上涨只是大跌中的反弹。</div><div class="err-fix">▸ 永远从大周期往小周期分析，不要反过来</div></div>
+      <div class="err-card"><div class="err-title">错误2 — 把每根阴线都当OB</div><div class="err-body">下跌10根K线全部标成OB，结果不知道在哪里进场。OB只有一个，是推动反转的最后那根。</div><div class="err-fix">▸ 只标推动反转的那根最后反向K线</div></div>
+      <div class="err-card"><div class="err-title">错误3 — 没等CHoCH就抄底</div><div class="err-body">价格进入OB区域直接买，被止损出场后价格才真正反弹。进入OB不等于反转已确认。</div><div class="err-fix">▸ 等小周期结构反转信号再进场</div></div>
+      <div class="err-card"><div class="err-title">错误4 — 溢价区追多</div><div class="err-body">大周期看多，在溢价区追进，稍微回调就被止损出场，然后价格才继续涨。</div><div class="err-fix">▸ 宁可错过一段，等折价区的机会</div></div>
+      <div class="err-card"><div class="err-title">错误5 — 用失效的OB</div><div class="err-body">OB被价格来回穿越三次还用，结果直接跌穿。OB就像弹簧，弹多了就没力了。</div><div class="err-fix">▸ OB被价格穿越超过一次后放弃</div></div>
+      <div class="err-card"><div class="err-title">错误6 — 盈亏比不足还进场</div><div class="err-body">所有条件满足但盈亏比只有1:1.2，长期来看无法弥补亏损的几次。</div><div class="err-fix">▸ 盈亏比低于1:2直接跳过，不管信号多完美</div></div>
     </div>
   </div>
 </div>
 
 <!-- 第七章 -->
 <div class="chapter" id="ch7">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 07</div>
-    <div class="ch-title">入场前检查清单</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 07</div><div class="ch-title">入场前检查清单</div></div>
   <div class="ch-body">
     <div class="section">
-      <div class="sec-body"><p>六个问题全部回答「否」才能进场。点击打勾确认。</p></div>
+      <div class="sec-body"><p>六个问题全部回答「是」才能进场。点击打勾确认。</p></div>
       <div class="checklist" id="checklist">
-        <div class="check-item">
-          <div class="check-box" onclick="toggleCheck(this)"></div>
-          <div><div class="check-q">大周期方向已确认（日线/4H看清趋势）？</div><div class="check-a">未确认 → 不进场</div></div>
-        </div>
-        <div class="check-item">
-          <div class="check-box" onclick="toggleCheck(this)"></div>
-          <div><div class="check-q">这个OB是反转前最后一根反向K线？</div><div class="check-a">不是 → 不是有效OB</div></div>
-        </div>
-        <div class="check-item">
-          <div class="check-box" onclick="toggleCheck(this)"></div>
-          <div><div class="check-q">价格进入OB后小周期有结构反转信号？</div><div class="check-a">没有 → 继续等</div></div>
-        </div>
-        <div class="check-item">
-          <div class="check-box" onclick="toggleCheck(this)"></div>
-          <div><div class="check-q">入场点在折价区（做多）或溢价区（做空）？</div><div class="check-a">不在 → 等回调</div></div>
-        </div>
-        <div class="check-item">
-          <div class="check-box" onclick="toggleCheck(this)"></div>
-          <div><div class="check-q">这个OB没有被价格多次穿越过？</div><div class="check-a">穿越超过一次 → 放弃</div></div>
-        </div>
-        <div class="check-item">
-          <div class="check-box" onclick="toggleCheck(this)"></div>
-          <div><div class="check-q">盈亏比达到1:2或以上？</div><div class="check-a">低于1:2 → 跳过</div></div>
-        </div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><div class="check-q">大周期方向已确认（日线/4H看清趋势）？</div><div class="check-a">未确认 → 不进场</div></div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><div class="check-q">这个OB是反转前最后一根反向K线？</div><div class="check-a">不是 → 不是有效OB</div></div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><div class="check-q">价格进入OB后小周期有结构反转信号？</div><div class="check-a">没有 → 继续等</div></div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><div class="check-q">入场点在折价区（做多）或溢价区（做空）？</div><div class="check-a">不在 → 等回调</div></div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><div class="check-q">这个OB没有被价格多次穿越过？</div><div class="check-a">穿越超过一次 → 放弃</div></div></div>
+        <div class="check-item"><div class="check-box" onclick="toggleCheck(this)"></div><div><div class="check-q">盈亏比达到1:2或以上？</div><div class="check-a">低于1:2 → 跳过</div></div></div>
       </div>
       <div class="tip green" id="all-clear" style="display:none;margin-top:14px">✓ 六项全部确认，可以考虑入场</div>
+      <div class="tip" style="margin-top:14px">不进场也是一种操作。等待完美的设置，比强迫自己每天交易更赚钱。</div>
     </div>
   </div>
 </div>
 
 <!-- 第八章 -->
 <div class="chapter" id="ch8">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 08</div>
-    <div class="ch-title">做空对照表</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 08</div><div class="ch-title">做空对照表</div></div>
   <div class="ch-body">
     <div class="section">
-      <div class="sec-body"><p>做空逻辑与做多完全对称，方向相反。</p></div>
       <div class="vs-table">
-        <div class="vs-row header">
-          <div class="vs-cell label">步骤</div>
-          <div class="vs-cell">做多</div>
-          <div class="vs-cell">做空</div>
-        </div>
-        <div class="vs-row">
-          <div class="vs-cell label">大周期</div>
-          <div class="vs-cell long">HH + HL 上涨</div>
-          <div class="vs-cell short">LH + LL 下跌</div>
-        </div>
-        <div class="vs-row">
-          <div class="vs-cell label">CHoCH</div>
-          <div class="vs-cell long">回调中向上突破</div>
-          <div class="vs-cell short">反弹中向下突破</div>
-        </div>
-        <div class="vs-row">
-          <div class="vs-cell label">入场区</div>
-          <div class="vs-cell long">折价区（&lt;50%）</div>
-          <div class="vs-cell short">溢价区（&gt;50%）</div>
-        </div>
-        <div class="vs-row">
-          <div class="vs-cell label">OB类型</div>
-          <div class="vs-cell long">最后一根阴线</div>
-          <div class="vs-cell short">最后一根阳线</div>
-        </div>
-        <div class="vs-row">
-          <div class="vs-cell label">小周期</div>
-          <div class="vs-cell long">向上反转确认</div>
-          <div class="vs-cell short">向下反转确认</div>
-        </div>
-        <div class="vs-row">
-          <div class="vs-cell label">止损</div>
-          <div class="vs-cell long">OB实体下方</div>
-          <div class="vs-cell short">OB实体上方</div>
-        </div>
-        <div class="vs-row">
-          <div class="vs-cell label">止盈</div>
-          <div class="vs-cell long">上方前高流动性</div>
-          <div class="vs-cell short">下方前低流动性</div>
-        </div>
+        <div class="vs-row header"><div class="vs-cell label">步骤</div><div class="vs-cell">做多</div><div class="vs-cell">做空</div></div>
+        <div class="vs-row"><div class="vs-cell label">大周期</div><div class="vs-cell long">HH+HL 上涨</div><div class="vs-cell short">LH+LL 下跌</div></div>
+        <div class="vs-row"><div class="vs-cell label">CHoCH</div><div class="vs-cell long">回调中向上突破</div><div class="vs-cell short">反弹中向下突破</div></div>
+        <div class="vs-row"><div class="vs-cell label">入场区</div><div class="vs-cell long">折价区(&lt;50%)</div><div class="vs-cell short">溢价区(&gt;50%)</div></div>
+        <div class="vs-row"><div class="vs-cell label">OB类型</div><div class="vs-cell long">最后一根阴线</div><div class="vs-cell short">最后一根阳线</div></div>
+        <div class="vs-row"><div class="vs-cell label">小周期</div><div class="vs-cell long">向上反转确认</div><div class="vs-cell short">向下反转确认</div></div>
+        <div class="vs-row"><div class="vs-cell label">止损</div><div class="vs-cell long">OB实体下方</div><div class="vs-cell short">OB实体上方</div></div>
+        <div class="vs-row"><div class="vs-cell label">止盈</div><div class="vs-cell long">上方前高流动性</div><div class="vs-cell short">下方前低流动性</div></div>
       </div>
     </div>
   </div>
@@ -757,23 +704,20 @@ footer {
 
 <!-- 第九章 -->
 <div class="chapter" id="ch9">
-  <div class="ch-header">
-    <div class="ch-num">CHAPTER 09</div>
-    <div class="ch-title">实战建议</div>
-  </div>
+  <div class="ch-header"><div class="ch-num">CHAPTER 09</div><div class="ch-title">实战建议</div></div>
   <div class="ch-body">
     <div class="section">
       <div class="sec-title">推荐工具</div>
       <ul class="slist">
         <li><strong>TradingView</strong>：图表分析，手动标OB/FVG/流动性，搜索「ICT」「Smart Money」免费指标</li>
-        <li><strong>CoinGlass</strong>：加密货币清仓热力图，直观看流动性密集区</li>
+        <li><strong>CoinGlass</strong>：加密货币清仓热力图，直观看到流动性密集区</li>
         <li><strong>Coinalyze</strong>：未平仓合约、资金费率、多空比，辅助判断市场情绪</li>
       </ul>
     </div>
     <div class="section">
       <div class="sec-title">学习方法</div>
       <ul class="slist">
-        <li><strong>先复盘，不要用真钱</strong>：在TradingView遮住右边行情，一根一根往右推</li>
+        <li><strong>先复盘，不用真钱</strong>：在TradingView遮住右边行情，一根一根往右推</li>
         <li><strong>记录每笔交易</strong>：入场理由、止损止盈位、结果，定期复盘找规律</li>
         <li><strong>控制频率</strong>：一周1笔完美的，比每天10笔凑合的更赚钱</li>
       </ul>
@@ -785,7 +729,6 @@ footer {
         <li><strong>仓位控制第一</strong>：每笔风险不超过总资金1%~2%，保住本金才能持续交易</li>
         <li><strong>等待是核心技能</strong>：SMC的精髓不是频繁操作，而是耐心等待高概率机会</li>
       </ul>
-      <div class="tip">不进场也是一种操作。等待完美的设置，比强迫自己每天交易更赚钱。</div>
     </div>
   </div>
 </div>
@@ -798,33 +741,22 @@ footer {
 </footer>
 
 <script>
-function toggleDrawer() {
-  document.getElementById('drawer').classList.toggle('open');
-}
-function closeDrawer() {
-  document.getElementById('drawer').classList.remove('open');
-}
-document.addEventListener('click', e => {
-  const d = document.getElementById('drawer');
-  if (d.classList.contains('open') && !d.contains(e.target) && !e.target.closest('.menu-btn')) {
-    d.classList.remove('open');
-  }
+function toggleDrawer(){document.getElementById('drawer').classList.toggle('open');}
+function closeDrawer(){document.getElementById('drawer').classList.remove('open');}
+document.addEventListener('click',e=>{
+  const d=document.getElementById('drawer');
+  if(d.classList.contains('open')&&!d.contains(e.target)&&!e.target.closest('.menu-btn'))d.classList.remove('open');
 });
-
-// 阅读进度
-window.addEventListener('scroll', () => {
-  const h = document.documentElement;
-  const pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
-  document.getElementById('prog').style.width = pct + '%';
+window.addEventListener('scroll',()=>{
+  const h=document.documentElement;
+  document.getElementById('prog').style.width=(h.scrollTop/(h.scrollHeight-h.clientHeight)*100)+'%';
 });
-
-// 检查清单
-function toggleCheck(el) {
+function toggleCheck(el){
   el.classList.toggle('checked');
-  el.textContent = el.classList.contains('checked') ? '✓' : '';
-  const all = document.querySelectorAll('#checklist .check-box');
-  const done = document.querySelectorAll('#checklist .check-box.checked');
-  document.getElementById('all-clear').style.display = done.length === all.length ? 'block' : 'none';
+  el.textContent=el.classList.contains('checked')?'✓':'';
+  const all=document.querySelectorAll('#checklist .check-box');
+  const done=document.querySelectorAll('#checklist .check-box.checked');
+  document.getElementById('all-clear').style.display=done.length===all.length?'block':'none';
 }
 </script>
 </body>
